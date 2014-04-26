@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.weheros.account.domain.Account;
+import com.weheros.account.domain.SessionTokenService;
 import com.weheros.account.exception.AccountException;
 import com.weheros.account.front.Head;
 import com.weheros.account.front.LoginResponse;
@@ -30,7 +31,7 @@ public class AccountManager implements IAccountManager {
 	@Override
 	public LoginResponse verificate(String account, String password) {
 		
-		String sql="select * from account where account=? and password=?";
+		String sql="select count(*) from account where account=? and password=?";
 		Object[] values=new Object[]{account,password};
 		int num= relationalDataAccess.queryCount(sql, values);
 		// fail handle
@@ -49,14 +50,18 @@ public class AccountManager implements IAccountManager {
 		ResBody body=new ResBody();
 		body.setUserInfo(account);
 		//TODO:find the signal server ip and port.
-		
+		// this must be done thorough rpc.
+		body.setSsIP("42.96.149.86");
+		body.setSsPort(9100);
 		//TODO:find the stunserver.
+		body.setStunServer("stunserver.org");
 		
-		//TODO: session token algorithm
-		// based on username ,password,and random numbers
+		//session token algorithm
+		// based on username ,password,and random numbers		
 		
+		int LOGIN_RES=1 << 4;// see im2-av <code>SignalType</code>
 		//put in body and head
-		Head head=new Head("sessiontoken",1<<4,0);
+		Head head=new Head(SessionTokenService.generateSessionToken(username, password),LOGIN_RES,0);
 		LoginResponse res=new LoginResponse(head,body);	
 		
 		return res;
