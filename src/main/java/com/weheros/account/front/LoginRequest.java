@@ -23,6 +23,7 @@ public class LoginRequest implements Serializable {
 	
 	protected Head head;
 	protected Object body;
+	
 	public Head getHead() {
 		return head;
 	}

@@ -46,12 +46,12 @@ public class AccountManager implements IAccountManager {
 	private LoginResponse encapslate(String username, String password) {
 		Account account=new Account();
 		account.setAccount(username);
-		//account.setPassword(password);
+		account.setPassword("");
 		ResBody body=new ResBody();
 		body.setUserInfo(account);
 		//TODO:find the signal server ip and port.
 		// this must be done thorough rpc.
-		body.setSsIP("42.96.149.86");
+		body.setSsIP("115.29.145.142");
 		body.setSsPort(9100);
 		//TODO:find the stunserver.
 		body.setStunServer("stunserver.org");

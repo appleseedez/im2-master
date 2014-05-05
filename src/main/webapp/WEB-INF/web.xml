@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>CloudCommunity</display-name>
+  <display-name>im2master</display-name>
   <welcome-file-list>
-    <welcome-file>index.do</welcome-file>   
+    <welcome-file>index.html</welcome-file>   
  
   </welcome-file-list>
   <filter>
@@ -30,19 +30,20 @@
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>             
-                classpath*:/spring/applicationContext*.xml 
-               <!--  classpath*:/spring/application-security.xml -->
+                classpath*:/spring/applicationContext.xml 
+              
         </param-value>
   </context-param>
   <servlet>
-    <servlet-name>im2message</servlet-name>
+    <servlet-name>im2master</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet
         </servlet-class>
     <load-on-startup>2</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>im2message</servlet-name>
-    <url-pattern>/</url-pattern>
+    <servlet-name>im2master</servlet-name>
+    <url-pattern>*.do</url-pattern>
+    <url-pattern>*.json</url-pattern>
   </servlet-mapping>
  
  
